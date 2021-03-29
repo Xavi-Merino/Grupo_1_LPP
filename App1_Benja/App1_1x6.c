@@ -14,9 +14,9 @@ struct struct_libro
     char sede[20];
 };
 
-FILE *read_file(void)
+FILE *read_file(char *filename)
 {
-    FILE *archivo_csv = fopen("ejemplo.csv", "r");
+    FILE *archivo_csv = fopen(filename, "r");
     if (archivo_csv == NULL)
     {
         printf("el archivo no pudo ser abierto");
@@ -110,7 +110,7 @@ void printmenu()
     printf("2. Quitar un libro de la Biblioteca\n");
     printf("3. Agregar una sede\n");
     printf("4. Quitar una sede (sólo si no hay libros)\n");
-    printf("5. Editar un libro\n"); // A qué se refiere con editar
+    printf("5. Editar un libro\n");
     printf("6. Cambiar un libro de sede\n");
     printf("7. Cambiar un libro de sección\n");
     printf("8. Cambiar un libro de piso\n");
@@ -178,7 +178,7 @@ int main(int argc, char **argv)
     /*deberia estar dentro del menu 1*/
     agregar_libro(values, &arr_size);
 
-    // for (int x = lib_ag; x < arr_size; ++x)
+    // for (int x = original_size; x < arr_size; ++x)
     // {
     //     printf("titulo: %s\n", values[x].titulo);
     //     printf("auto: %s\n", values[x].autor);
