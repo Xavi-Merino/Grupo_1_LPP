@@ -393,6 +393,7 @@ int main(int argc, char **argv) {
   int original_size = arr_size;
   // printf("tamano del array: %i\n", arr_size);
   rewind(libro_csv);
+
   struct struct_libro values[arr_size + 1024];
   f_populate(libro_csv, values, arr_size);
 
