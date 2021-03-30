@@ -94,40 +94,6 @@ void printmenu() {
   printf("   5. Salir\n");
 }
 
-// Submenu 1
-void print_agregar_cosas() {
-  printf("¿Qué desea agregar?\n");
-
-  printf("   1. Agregar un libro a la Bibloteca\n");
-  printf("   2. Agregar una sede\n");
-  printf("   3. Agregar secciones\n");
-  printf("   4. Agregar un piso\n");
-}
-
-// Submenu 2
-void print_quitar_cosas() {
-  printf("¿Qué desea quitar?\n");
-
-  printf("   1. Quitar un libro de la Biblioteca\n");
-  printf("   2. Quitar una sede (sólo si no hay libros)\n");
-  printf("   3. Eliminar secciones (sólo si no hay libros)\n");
-  printf("   4. Eliminar piso (sólo si no hay libros)\n");
-}
-
-// Submenu 3
-void print_editar_libro() {  // A qué se refiere con editar
-  printf("¿Que campo quiere editar?\n");
-  printf("   1. Cambiar el titulo de un libro\n");
-  printf("   2. Cambiar la seccion de un libro\n");
-  printf("   3. Cambiar el piso del libro\n");
-  printf("   4. Cambiar la sede del libro\n");
-  printf("   5. Cambiar el autor de un libro\n");
-  printf("   6. Cambiar el año de un libro\n");
-  printf("   7. Cambiar el el numero del estante de un libro\n");
-
-  // titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede
-}
-
 int agregar_libro(struct struct_libro libro_agregado[], int *index) {
   char temp;
   // cuantos libros quiere agregar?
