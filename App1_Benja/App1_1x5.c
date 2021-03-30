@@ -5,7 +5,7 @@
 struct struct_libro
 {
     char titulo[75];
-    char autor[50];
+    char autor[100];
     int anio;
     int estante_numero;
     char estante_seccion[50];
@@ -39,17 +39,14 @@ int cuenta_lineas(FILE *libro_csv)
     return contador;
 }
 
-char f_populate(FILE *libro_csv, struct struct_libro values[], int n_lineas)
+char f_populate(FILE *libro_csv, struct struct_libro values[])
 {
     int i = 0;
-    char buff[n_lineas];
-    fgets(buff, 200, (FILE *)libro_csv);
-    while (fgets(buff, n_lineas, libro_csv))
+    char buff[1024];
+    fgets(buff, 1024, (FILE *)libro_csv);
+    while (fgets(buff, 1024, libro_csv))
     {
         int field_count = 0;
-
-        if (n_lineas == 1)
-            continue;
 
         int commas = 0;
 
@@ -71,30 +68,44 @@ char f_populate(FILE *libro_csv, struct struct_libro values[], int n_lineas)
 
         while (field)
         {
-
+            int skip = 0;
             if (field_count == 0)
             {
                 strcpy(values[i].titulo, field);
-                while (commas--)
+                if (field[0] == '"')
                 {
-                    field = strtok(NULL, ",");
-                    strcat(values[i].titulo, field);
+                    while (field[strlen(field) - 1] != '"')
+                    {
+                        field = strtok(NULL, ",");
+                        strcat(values[i].titulo, ",");
+                        strcat(values[i].titulo, field);
+                    }
                 }
             }
-
-            if (field_count == 1)
+            else if (field_count == 1)
+            {
                 strcpy(values[i].autor, field);
-            if (field_count == 2)
+                if (field[0] == '"')
+                {
+                    while (field[strlen(field) - 1] != '"')
+                    {
+                        field = strtok(NULL, ",");
+                        strcat(values[i].autor, ",");
+                        strcat(values[i].autor, field);
+                    }
+                }
+            }
+            else if (field_count == 2)
                 values[i].anio = atoi(field);
-            if (field_count == 3)
+            else if (field_count == 3)
                 values[i].estante_numero = atoi(field);
-            if (field_count == 4)
+            else if (field_count == 4)
                 strcpy(values[i].estante_seccion, field);
-            if (field_count == 5)
+            else if (field_count == 5)
                 values[i].piso = atoi(field);
-            if (field_count == 6)
+            else if (field_count == 6)
                 strcpy(values[i].edificio, field);
-            if (field_count == 7)
+            else if (field_count == 7)
                 strcpy(values[i].sede, field);
             field = strtok(NULL, ",");
             field_count++;
@@ -111,9 +122,11 @@ int main()
     printf("tamano del array: %i\n", arr_size);
     rewind(libro_csv);
     struct struct_libro values[arr_size];
-    f_populate(libro_csv, values, arr_size);
+    f_populate(libro_csv, values);
 
-    printf("Nombre del titulo: %s\n", values[0].titulo);
+    printf("Nombre del titulo: %s\n", values[0].autor);
+    printf("Nombre del titulo: %s\n", values[1].autor);
+    printf("Nombre del titulo: %s\n", values[2].autor);
 
     return 0;
 }
