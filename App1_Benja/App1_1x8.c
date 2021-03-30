@@ -381,6 +381,11 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
     return 0;
 }
 
+int eliminar_sede(void)
+{
+    printf("no se pueden eliminar sedes\n");
+}
+
 int main(int argc, char **argv)
 {
     printf("--------Inicio---------\n");
