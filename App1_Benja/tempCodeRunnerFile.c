@@ -1,1 +1,1 @@
-printf("debug\n");
+0

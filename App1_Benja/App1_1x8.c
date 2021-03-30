@@ -16,7 +16,7 @@ struct struct_libro
 
 FILE *read_file(void)
 {
-    FILE *archivo_csv = fopen("ejemplo1.csv", "r");
+    FILE *archivo_csv = fopen("ejemplo.csv", "r");
     if (archivo_csv == NULL)
     {
         printf("el archivo no pudo ser abierto");
@@ -298,18 +298,12 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
 
     for (int i = 0; i <= arr_size; i++)
     {
+
         if (strcmp(titulo, values[i].titulo) == 0)
         {
             int opcion = 0;
             printf("Introduzca numero del campo que desea eliminar\n");
             printf("1) Titulo del libro (Esto eliminara completamente todos los datos del libro)\n");
-            printf("2) Eliminar autor\n");
-            printf("3) Eliminar anio\n");
-            printf("4) Eliminar numero de estante\n");
-            printf("5) Eliminar seccion\n");
-            printf("6) Eliminar piso\n");
-            printf("7) Eliminar edificio\n");
-            printf("8) Eliminar sede\n");
             printf("8) Volver al menu\n");
             printf("-------------------\n");
             scanf("%d", &opcion);
@@ -321,6 +315,7 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 scanf("%c", &temp);
                 printf("Para confirmar que quiere eliminar el libro escriba el numero del libro: \n");
                 scanf("%i", &numero_libro);
+
                 if (numero_libro >= arr_size + 1)
                     printf("Se equivoco de numero porfavor intentelo denuevo.\n");
                 else
@@ -330,48 +325,7 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 }
                 printf("ahora el titulo en el espacio %i es %s\n", i, values[i].titulo);
             }
-            if (opcion == 2)
-            {
-                printf("El/los autores actuales son: %s\n", values[i].autor);
-                strcpy(values[i].autor, "none");
-                printf("Nuevo autor: %s \n", values[i].autor);
-            }
-            if (opcion == 3)
-            {
-                printf("El anio actual es: %d\n", values[i].anio);
-                values[i].anio = 0;
-                printf("Nuevo autor: %s \n", values[i].autor);
-            }
-            if (opcion == 4)
-            {
-                printf("El numero del estante actual es: %d\n", values[i].estante_numero);
-                values[i].estante_numero = 0;
-                printf("Nuevo estante: %i \n", values[i].estante_numero);
-            }
-            if (opcion == 5)
-            {
-                printf("La seccion del estante actual es: %s\n", values[i].estante_seccion);
-                strcpy(values[i].estante_seccion, "none");
-                printf("Nueva seccion: %s \n", values[i].estante_seccion);
-            }
-            if (opcion == 6)
-            {
-                printf("El piso actual es: %d\n", values[i].piso);
-                values[i].piso = 0;
-                printf("Nuevo piso: %i \n", values[i].piso);
-            }
-            if (opcion == 7)
-            {
-                printf("El edificio actual es: %s\n", values[i].edificio);
-                strcpy(values[i].edificio, "none");
-                printf("Nuevo edificio: %s \n", values[i].edificio);
-            }
-            if (opcion == 8)
-            {
-                printf("La sede actual es: %s\n", values[i].sede);
-                strcpy(values[i].sede, "none");
-                printf("Nueva sede: %s \n", values[i].sede);
-            }
+
             if (opcion == 9)
             {
                 return 0;
@@ -393,7 +347,6 @@ int main(int argc, char **argv)
     int arr_size = cuenta_lineas(libro_csv);
     rewind(libro_csv);
     //debug
-
     printf("tamano del array: %i\n", arr_size);
 
     struct struct_libro values[arr_size + 1024];
@@ -413,7 +366,7 @@ int main(int argc, char **argv)
     printf("-------------------\n");
     editar_libro(values, arr_size);
     eliminar_libro(values, arr_size);
-    printf("el libro en el espacio es %s", values[1001].titulo);
+    printf("el libro en el espacio es %s", values[1].titulo);
 
     return 0;
 }
