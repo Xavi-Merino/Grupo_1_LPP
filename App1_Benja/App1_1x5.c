@@ -16,7 +16,7 @@ struct struct_libro
 
 FILE *read_file(void)
 {
-    FILE *archivo_csv = fopen("ejemplo.csv", "r");
+    FILE *archivo_csv = fopen("ejemplo1.csv", "r");
     if (archivo_csv == NULL)
     {
         printf("el archivo no pudo ser abierto");
@@ -47,6 +47,7 @@ char f_populate(FILE *libro_csv, struct struct_libro values[], int n_lineas)
     while (fgets(buff, n_lineas, libro_csv))
     {
         int field_count = 0;
+
         if (n_lineas == 1)
             continue;
 

@@ -104,7 +104,7 @@ char f_populate(FILE *libro_csv, struct struct_libro values[], int n_lineas)
     return 0;
 }
 
-void printmenu()
+void print_menu()
 {
     printf("1. Agregar un libro a la Bibloteca\n");
     printf("2. Quitar un libro de la Biblioteca\n");
@@ -168,7 +168,7 @@ int agregar_libro(struct struct_libro libro_agregado[], int *index)
 
 int main(int argc, char **argv)
 {
-    FILE *libro_csv = read_file(); /*cambial la forma*/
+    FILE *libro_csv = read_file(argv[1]); /*cambial la forma*/
     int arr_size = cuenta_lineas(libro_csv);
     rewind(libro_csv);
     struct struct_libro values[arr_size + 1024];
