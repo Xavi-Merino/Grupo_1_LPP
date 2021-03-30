@@ -330,48 +330,7 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 }
                 printf("ahora el titulo en el espacio %i es %s\n", i, values[i].titulo);
             }
-            if (opcion == 2)
-            {
-                printf("El/los autores actuales son: %s\n", values[i].autor);
-                strcpy(values[i].autor, "none");
-                printf("Nuevo autor: %s \n", values[i].autor);
-            }
-            if (opcion == 3)
-            {
-                printf("El anio actual es: %d\n", values[i].anio);
-                values[i].anio = 0;
-                printf("Nuevo autor: %s \n", values[i].autor);
-            }
-            if (opcion == 4)
-            {
-                printf("El numero del estante actual es: %d\n", values[i].estante_numero);
-                values[i].estante_numero = 0;
-                printf("Nuevo estante: %i \n", values[i].estante_numero);
-            }
-            if (opcion == 5)
-            {
-                printf("La seccion del estante actual es: %s\n", values[i].estante_seccion);
-                strcpy(values[i].estante_seccion, "none");
-                printf("Nueva seccion: %s \n", values[i].estante_seccion);
-            }
-            if (opcion == 6)
-            {
-                printf("El piso actual es: %d\n", values[i].piso);
-                values[i].piso = 0;
-                printf("Nuevo piso: %i \n", values[i].piso);
-            }
-            if (opcion == 7)
-            {
-                printf("El edificio actual es: %s\n", values[i].edificio);
-                strcpy(values[i].edificio, "none");
-                printf("Nuevo edificio: %s \n", values[i].edificio);
-            }
-            if (opcion == 8)
-            {
-                printf("La sede actual es: %s\n", values[i].sede);
-                strcpy(values[i].sede, "none");
-                printf("Nueva sede: %s \n", values[i].sede);
-            }
+
             if (opcion == 9)
             {
                 return 0;
