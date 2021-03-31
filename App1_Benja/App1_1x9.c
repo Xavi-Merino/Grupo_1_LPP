@@ -303,13 +303,6 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
             int opcion = 0;
             printf("Introduzca numero del campo que desea eliminar\n");
             printf("1) Titulo del libro (Esto eliminara completamente todos los datos del libro)\n");
-            printf("2) Eliminar autor\n");
-            printf("3) Eliminar anio\n");
-            printf("4) Eliminar numero de estante\n");
-            printf("5) Eliminar seccion\n");
-            printf("6) Eliminar piso\n");
-            printf("7) Eliminar edificio\n");
-            printf("8) Eliminar sede\n");
             printf("8) Volver al menu\n");
             printf("-------------------\n");
             scanf("%d", &opcion);
@@ -321,14 +314,14 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 scanf("%c", &temp);
                 printf("Para confirmar que quiere eliminar el libro escriba el numero del libro: \n");
                 scanf("%i", &numero_libro);
-                if (numero_libro >= arr_size + 1)
+
+                if (numero_libro >= arr_size)
                     printf("Se equivoco de numero porfavor intentelo denuevo.\n");
                 else
                 {
-                    for (c = numero_libro - 1; c < arr_size - 1; c++)
+                    for (c = numero_libro; c < arr_size; c++)
                         values[c] = values[c + 1];
                 }
-                printf("ahora el titulo en el espacio %i es %s\n", i, values[i].titulo);
             }
 
             if (opcion == 9)
@@ -362,15 +355,16 @@ int main(int argc, char **argv)
     printf("Nombre del titulo: %s\n", values[0].titulo);
     printf("Nombre del autor: %s\n", values[0].autor);
     printf("-------------------\n");
-    int original_size = arr_size;
+    // int original_size = arr_size;
 
-    /*deberia estar dentro del menu 1*/
-    agregar_libro(values, &arr_size);
-    //debug
-    printf("titulo: %s\n", values[original_size].titulo);
-    //debug
-    printf("-------------------\n");
-    editar_libro(values, arr_size);
+    // /*deberia estar dentro del menu 1*/
+    // agregar_libro(values, &arr_size);
+    // //debug
+    // printf("titulo: %s\n", values[original_size].titulo);
+    // //debug
+    // printf("-------------------\n");
+    // editar_libro(values, arr_size);
+
     eliminar_libro(values, arr_size);
     printf("el libro en el espacio es %s", values[1001].titulo);
 
