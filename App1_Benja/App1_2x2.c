@@ -16,7 +16,7 @@ struct struct_libro
 
 FILE *read_file(void)
 {
-    FILE *archivo_csv = fopen("ejemplo1.csv", "r");
+    FILE *archivo_csv = fopen("ejemplo.csv", "r");
     if (archivo_csv == NULL)
     {
         printf("\nel archivo no pudo ser abierto");
@@ -365,13 +365,14 @@ int csv_out(struct struct_libro values[], int original_size)
 {
     FILE *fp;
     int i;
-    fp = fopen("/home/malware/App1/ejemplo.csv", "w");
+    fp = fopen("prueba.csv", "w");
     fprintf(fp, "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
 
-    for (i = 0; i < original_size - 1; i++)
+    for (i = 0; i < original_size - 2; i++)
     {
         fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", values[i].titulo, values[i].autor, values[i].anio, values[i].estante_numero, values[i].estante_seccion, values[i].piso, values[i].edificio, values[i].sede);
     }
+
     fclose(fp);
     return 0;
 }
@@ -386,6 +387,7 @@ int main(int argc, char **argv)
     struct struct_libro values[arr_size + 1024];
     f_populate(libro_csv, values);
     printf("\n%s", values[1].titulo);
+
     //Menu
     /*menu opcion 1*/
     printf("\n\n--------Buscar Libro---------");
@@ -400,6 +402,6 @@ int main(int argc, char **argv)
     printf("\n\n--------Eliminar Libro---------");
     eliminar_libro(values, arr_size);
     /*menu opcion 5*/
-    // csv_out(values, arr_size);
+    csv_out(values, arr_size);
     return 0;
 }
