@@ -16,7 +16,7 @@ struct struct_libro
 
 FILE *read_file(void)
 {
-    FILE *archivo_csv = fopen("ejemplo1.csv", "r");
+    FILE *archivo_csv = fopen("ejemplo.csv", "r");
     if (archivo_csv == NULL)
     {
         printf("\nel archivo no pudo ser abierto");
@@ -288,12 +288,12 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
 {
     char titulo[100];
     char temp;
-    printf("-------------------\n");
+    printf("\n-------------------");
     printf("Introduzca el titulo del libro del cual desea eliminar elementos: ");
 
     scanf("%[^\n]%*c", titulo);
-    printf("El libro seleccionado es : %s\n", titulo);
-    printf("-------------------\n");
+    printf("\nEl libro seleccionado es : %s", titulo);
+    printf("\n-------------------");
 
     for (int i = 0; i <= arr_size; i++)
     {
@@ -336,6 +336,21 @@ int eliminar_sede(void)
     printf("\nno se pueden eliminar sedes");
 }
 
+int csv_out(struct struct_libro values[], int original_size)
+{
+    FILE *fp;
+    int i;
+    fp = fopen("/home/malware/App1/ejemplo.csv", "w");
+    fprintf(fp, "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
+
+    for (i = 0; i < original_size - 1; i++)
+    {
+        fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", values[i].titulo, values[i].autor, values[i].anio, values[i].estante_numero, values[i].estante_seccion, values[i].piso, values[i].edificio, values[i].sede);
+    }
+    fclose(fp);
+    return 0;
+}
+
 int main(int argc, char **argv)
 {
     printf("\n--------Inicio---------");
@@ -348,21 +363,21 @@ int main(int argc, char **argv)
     struct struct_libro values[arr_size + 1024];
 
     f_populate(libro_csv, values);
+    printf("\nel libro en el espacio 18 es %s\n", values[16].autor);
     printf("\nNombre del titulo: %s", values[0].titulo);
     printf("\nNombre del autor: %s", values[0].autor);
     printf("\n-------------------");
-    // int original_size = arr_size;
+    int original_size = arr_size;
 
-    // /*deberia estar dentro del menu 1*/
-    // agregar_libro(values, &arr_size);
-
-    // printf("titulo: %s\n", values[original_size].titulo);
-
-    // printf("-------------------\n");
-    // editar_libro(values, arr_size);
-
+    /*deberia estar dentro del menu 1*/
+    agregar_libro(values, &arr_size);
+    printf("\ntitulo: %s", values[original_size].titulo);
+    printf("\n-------------------");
+    /*menu opcion 2*/
+    editar_libro(values, arr_size);
+    /*menu opcion 3*/
     eliminar_libro(values, arr_size);
     printf("\nel libro en el espacio es %s\n", values[0].titulo);
-
+    csv_out(values, arr_size);
     return 0;
 }
