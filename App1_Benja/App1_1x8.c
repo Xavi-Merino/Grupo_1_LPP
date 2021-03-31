@@ -360,13 +360,12 @@ int main(int argc, char **argv)
 
     /*deberia estar dentro del menu 1*/
     agregar_libro(values, &arr_size);
-    //debug
     printf("titulo: %s\n", values[original_size].titulo);
-    //debug
+
     printf("-------------------\n");
     editar_libro(values, arr_size);
-    eliminar_libro(values, arr_size);
-    printf("el libro en el espacio es %s", values[1].titulo);
+    // eliminar_libro(values, arr_size);
+    // printf("el libro en el espacio es %s", values[1].titulo);
 
     return 0;
 }
