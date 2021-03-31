@@ -343,7 +343,7 @@ int csv_out(struct struct_libro values[], int original_size){
     fp = fopen("/home/malware/App1/ejemplo.csv","w");
     fprintf(fp,"titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
 
-    for(i = 0; i < original_size-1; i++){
+    for(i = 0; i < original_size-1; i++){ // original_size -1 para que no imprima una linea vacia alfinal
         fprintf(fp,"%s,%s,%d,%d,%s,%d,%s,%s",values[i].titulo, values[i].autor, values[i].anio, values[i].estante_numero, values[i].estante_seccion, values[i].piso, values[i].edificio, values[i].sede);
     }
     fclose(fp);
