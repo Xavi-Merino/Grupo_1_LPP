@@ -16,7 +16,7 @@ struct struct_libro
 
 FILE *read_file(void)
 {
-    FILE *archivo_csv = fopen("ejemplo.csv", "r");
+    FILE *archivo_csv = fopen("ejemplo1.csv", "r");
     if (archivo_csv == NULL)
     {
         printf("el archivo no pudo ser abierto");
@@ -114,6 +114,32 @@ char f_populate(FILE *libro_csv, struct struct_libro values[])
     }
     return 0;
 }
+
+void printmenu()
+{
+  printf("Bienvenido/a a la Biblioteca UAI. ¿Qué desea hacer?\n");
+
+  printf("   1. ¿Deseas agregar un libro?\n");
+  printf("   2. ¿Deseas editar un libro?\n");
+  printf("   3. ¿Deseas eliminar un libro?\n");
+  printf("   4. ¿Desea buscar un libro?\n");
+  printf("   5. Salir\n");
+}
+
+int buscarlibro(struct struct_libro values[], int arr_size){
+  char titulo[100];
+  int fila;
+  printf("para editar un libro, ingrese el titulo: \n");
+  scanf("%s", titulo);
+  for (int i = 0; i<= arr_size; i++ ){
+      if(strcmp(titulo, values[i].titulo) == 0){
+          printf("%d\n", i);
+          fila = i;
+      }
+  }
+  return fila;
+}
+
 
 int agregar_libro(struct struct_libro libro_agregado[], int *index)
 {
@@ -298,12 +324,18 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
 
     for (int i = 0; i <= arr_size; i++)
     {
-
         if (strcmp(titulo, values[i].titulo) == 0)
         {
             int opcion = 0;
             printf("Introduzca numero del campo que desea eliminar\n");
             printf("1) Titulo del libro (Esto eliminara completamente todos los datos del libro)\n");
+            printf("2) Eliminar autor\n");
+            printf("3) Eliminar anio\n");
+            printf("4) Eliminar numero de estante\n");
+            printf("5) Eliminar seccion\n");
+            printf("6) Eliminar piso\n");
+            printf("7) Eliminar edificio\n");
+            printf("8) Eliminar sede\n");
             printf("8) Volver al menu\n");
             printf("-------------------\n");
             scanf("%d", &opcion);
@@ -315,7 +347,6 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 scanf("%c", &temp);
                 printf("Para confirmar que quiere eliminar el libro escriba el numero del libro: \n");
                 scanf("%i", &numero_libro);
-
                 if (numero_libro >= arr_size + 1)
                     printf("Se equivoco de numero porfavor intentelo denuevo.\n");
                 else
@@ -347,25 +378,64 @@ int main(int argc, char **argv)
     int arr_size = cuenta_lineas(libro_csv);
     rewind(libro_csv);
     //debug
-    printf("tamano del array: %i\n", arr_size);
 
     struct struct_libro values[arr_size + 1024];
 
     f_populate(libro_csv, values);
     //debug
-    printf("Nombre del titulo: %s\n", values[0].titulo);
-    printf("Nombre del autor: %s\n", values[0].autor);
-    printf("-------------------\n");
     int original_size = arr_size;
 
-    /*deberia estar dentro del menu 1*/
-    agregar_libro(values, &arr_size);
-    printf("titulo: %s\n", values[original_size].titulo);
+    int flag = 1;
+    int menu;
 
-    printf("-------------------\n");
-    editar_libro(values, arr_size);
-    // eliminar_libro(values, arr_size);
-    // printf("el libro en el espacio es %s", values[1].titulo);
+ while (flag)
+  {
+    printmenu();
+    printf("\n");
+    printf("Ingrese el número de la acción: ");
+    scanf("%d", &menu);
 
-    return 0;
+    switch (menu)
+    {
+    case 1:
+      agregar_libro(values, &arr_size);
+      break;
+
+    case 2:
+      editar_libro(values, arr_size);
+      break;
+
+    case 3:
+      eliminar_libro(values, arr_size);
+      break;
+
+    case 4: ;
+      int fila;
+      fila = buscarlibro(values, arr_size);
+      printf("Título: %s\nAutor: %s\nAño: %d\nNº Estante: %d\nSección: %s\nPiso: %d\nEdificio: %s\nSede: %s\n", 
+        values[fila].titulo, 
+        values[fila].autor,
+        values[fila].anio,
+        values[fila].estante_numero,
+        values[fila].estante_seccion,
+        values[fila].piso,
+        values[fila].edificio,
+        values[fila].sede);
+      
+      break;
+
+    case 5: ;
+        eliminar_sede();
+
+
+    case 6:
+      flag = 0;
+      break;
+
+    default:
+      break;
+    }
+  }
+
+  return 0;
 }

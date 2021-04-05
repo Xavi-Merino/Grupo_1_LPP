@@ -10,7 +10,7 @@ struct struct_libro
     int estante_numero;
     char estante_seccion[50];
     int piso;
-    char edificio[10];
+    char edificio[20];
     char sede[20];
 };
 
@@ -298,7 +298,6 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
 
     for (int i = 0; i <= arr_size; i++)
     {
-
         if (strcmp(titulo, values[i].titulo) == 0)
         {
             int opcion = 0;
@@ -316,14 +315,13 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 printf("Para confirmar que quiere eliminar el libro escriba el numero del libro: \n");
                 scanf("%i", &numero_libro);
 
-                if (numero_libro >= arr_size + 1)
+                if (numero_libro >= arr_size)
                     printf("Se equivoco de numero porfavor intentelo denuevo.\n");
                 else
                 {
-                    for (c = numero_libro - 1; c < arr_size - 1; c++)
+                    for (c = numero_libro; c < arr_size; c++)
                         values[c] = values[c + 1];
                 }
-                printf("ahora el titulo en el espacio %i es %s\n", i, values[i].titulo);
             }
 
             if (opcion == 9)
@@ -339,7 +337,19 @@ int eliminar_sede(void)
 {
     printf("no se pueden eliminar sedes\n");
 }
+int csv_out(struct struct_libro values[], int original_size){
+    FILE * fp;
+    int i;
+    fp = fopen("/home/malware/App1/ejemplo.csv","w");
+    fprintf(fp,"titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
 
+    for(i = 0; i < original_size-1; i++){ // original_size -1 para que no imprima una linea vacia alfinal
+        fprintf(fp,"%s,%s,%d,%d,%s,%d,%s,%s",values[i].titulo, values[i].autor, values[i].anio, values[i].estante_numero, values[i].estante_seccion, values[i].piso, values[i].edificio, values[i].sede);
+    }
+    fclose(fp);
+    return 0;
+
+}
 int main(int argc, char **argv)
 {
     printf("--------Inicio---------\n");
@@ -347,6 +357,7 @@ int main(int argc, char **argv)
     int arr_size = cuenta_lineas(libro_csv);
     rewind(libro_csv);
     //debug
+
     printf("tamano del array: %i\n", arr_size);
 
     struct struct_libro values[arr_size + 1024];
@@ -354,18 +365,21 @@ int main(int argc, char **argv)
     f_populate(libro_csv, values);
     //debug
     printf("Nombre del titulo: %s\n", values[0].titulo);
-    printf("Nombre del autor: %s\n", values[0].autor);
+    printf("Nombre del autor: %s\n", values[16].autor);
+    printf("nombre del edificio: %s\n", values[2].edificio);
     printf("-------------------\n");
     int original_size = arr_size;
 
     /*deberia estar dentro del menu 1*/
-    agregar_libro(values, &arr_size);
+    //agregar_libro(values, &arr_size);
+    //debug
     printf("titulo: %s\n", values[original_size].titulo);
-
+    //debug
     printf("-------------------\n");
     editar_libro(values, arr_size);
-    // eliminar_libro(values, arr_size);
-    // printf("el libro en el espacio es %s", values[1].titulo);
-
+    /*eliminar_libro(values, arr_size);
+    printf("el libro en el espacio 1001 es %s", values[1001].titulo);*/
+    csv_out(values, original_size);
     return 0;
 }
+
