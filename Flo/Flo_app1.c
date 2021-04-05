@@ -123,7 +123,8 @@ void printmenu()
   printf("   2. ¿Deseas editar un libro?\n");
   printf("   3. ¿Deseas eliminar un libro?\n");
   printf("   4. ¿Desea buscar un libro?\n");
-  printf("   5. Salir\n");
+  printf(" 5. ¿Deseas eliminar una sede?");
+  printf("   6. Salir\n");
 }
 
 int buscarlibro(struct struct_libro values[], int arr_size){
