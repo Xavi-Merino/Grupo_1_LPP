@@ -134,12 +134,11 @@ int buscarlibro(struct struct_libro values[], int arr_size){
   scanf("%s", titulo);
   for (int i = 0; i<= arr_size; i++ ){
       if(strcmp(titulo, values[i].titulo) == 0){
-        fila= i;
+        fila = i;
       }
   }
   return fila;
 }
-
 
 int agregar_libro(struct struct_libro libro_agregado[], int *index)
 {
@@ -388,55 +387,55 @@ int main(int argc, char **argv)
     int flag = 1;
     int menu;
 
- while (flag)
-  {
-    printmenu();
-    printf("\n");
-    printf("Ingrese el número de la acción: ");
-    scanf("%d", &menu);
-
-    switch (menu)
+    while (flag)
     {
-    case 1:
-      agregar_libro(values, &arr_size);
-      break;
+        printmenu();
+        printf("\n");
+        printf("Ingrese el número de la acción: ");
+        scanf("%d", &menu);
 
-    case 2:
-      editar_libro(values, arr_size);
-      break;
-
-    case 3:
-      eliminar_libro(values, arr_size);
-      break;
-
-    case 4: ;
-      int fila;
-      fila=buscarlibro(values, arr_size);
-      printf("Título: %s\nAutor: %s\nAño: %d\nNº Estante: %d\nSección: %s\nPiso: %d\nEdificio: %s\nSede: %s\n", 
-        values[fila].titulo, 
-        values[fila].autor,
-        values[fila].anio,
-        values[fila].estante_numero,
-        values[fila].estante_seccion,
-        values[fila].piso,
-        values[fila].edificio,
-        values[fila].sede);
-      
-      break;
-
-    case 5: ;
-        eliminar_sede();
+        switch (menu)
+        {
+        case 1:
+        agregar_libro(values, &arr_size);
         break;
 
+        case 2:
+        editar_libro(values, arr_size);
+        break;
 
-    case 6:
-      flag = 0;
-      break;
+        case 3:
+        eliminar_libro(values, arr_size);
+        break;
 
-    default:
-      break;
+        case 4: ;
+        int fila;
+        fila=buscarlibro(values, arr_size);
+        printf("Título: %s\nAutor: %s\nAño: %d\nNº Estante: %d\nSección: %s\nPiso: %d\nEdificio: %s\nSede: %s\n", 
+            values[fila].titulo, 
+            values[fila].autor,
+            values[fila].anio,
+            values[fila].estante_numero,
+            values[fila].estante_seccion,
+            values[fila].piso,
+            values[fila].edificio,
+            values[fila].sede);
+        
+        break;
+
+        case 5: ;
+            eliminar_sede();
+            break;
+
+
+        case 6:
+        flag = 0;
+        break;
+
+        default:
+        break;
+        }
     }
-  }
 
-  return 0;
+    return 0;
 }
