@@ -126,7 +126,7 @@ void printmenu()
   printf("   5. ¿Deseas eliminar una sede?\n");
   printf("   6. Salir\n");
 }
-
+//buscar libro se imprime seis veces
 int buscarlibro(struct struct_libro values[], int arr_size){
   char titulo[100];
   int fila;
