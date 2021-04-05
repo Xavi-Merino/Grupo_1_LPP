@@ -119,9 +119,9 @@ void printmenu()
 {
   printf("Bienvenido/a a la Biblioteca UAI. ¿Qué desea hacer?\n");
 
-  printf("   1. ¿Deseas agregar algo?\n");
-  printf("   2. ¿Deseas quitar algo?\n");
-  printf("   3. ¿Deseas editar algo de algun libro?\n");
+  printf("   1. ¿Deseas agregar un libro?\n");
+  printf("   2. ¿Deseas editar un libro?\n");
+  printf("   3. ¿Deseas eliminar un libro?\n");
   printf("   4. ¿Desea buscar un libro?\n");
   printf("   5. Salir\n");
 }
