@@ -39,7 +39,7 @@ int cuenta_lineas(FILE *libro_csv)
     return contador;
 }
 
-char f_populate(FILE *libro_csv, struct struct_libro values[])
+char rellena_array(FILE *libro_csv, struct struct_libro array_libros[])
 {
     int i = 0;
     char buff[1024];
@@ -71,42 +71,42 @@ char f_populate(FILE *libro_csv, struct struct_libro values[])
             int skip = 0;
             if (field_count == 0)
             {
-                strcpy(values[i].titulo, field);
+                strcpy(array_libros[i].titulo, field);
                 if (field[0] == '"')
                 {
                     while (field[strlen(field) - 1] != '"')
                     {
                         field = strtok(NULL, ",");
-                        strcat(values[i].titulo, ",");
-                        strcat(values[i].titulo, field);
+                        strcat(array_libros[i].titulo, ",");
+                        strcat(array_libros[i].titulo, field);
                     }
                 }
             }
             else if (field_count == 1)
             {
-                strcpy(values[i].autor, field);
+                strcpy(array_libros[i].autor, field);
                 if (field[0] == '"')
                 {
                     while (field[strlen(field) - 1] != '"')
                     {
                         field = strtok(NULL, ",");
-                        strcat(values[i].autor, ",");
-                        strcat(values[i].autor, field);
+                        strcat(array_libros[i].autor, ",");
+                        strcat(array_libros[i].autor, field);
                     }
                 }
             }
             else if (field_count == 2)
-                values[i].anio = atoi(field);
+                array_libros[i].anio = atoi(field);
             else if (field_count == 3)
-                values[i].estante_numero = atoi(field);
+                array_libros[i].estante_numero = atoi(field);
             else if (field_count == 4)
-                strcpy(values[i].estante_seccion, field);
+                strcpy(array_libros[i].estante_seccion, field);
             else if (field_count == 5)
-                values[i].piso = atoi(field);
+                array_libros[i].piso = atoi(field);
             else if (field_count == 6)
-                strcpy(values[i].edificio, field);
+                strcpy(array_libros[i].edificio, field);
             else if (field_count == 7)
-                strcpy(values[i].sede, field);
+                strcpy(array_libros[i].sede, field);
             field = strtok(NULL, ",");
             field_count++;
         }
@@ -115,31 +115,44 @@ char f_populate(FILE *libro_csv, struct struct_libro values[])
     return 0;
 }
 
-int buscar_libro(struct struct_libro values[], int arr_size)
+void print_menu()
+{
+    printf("\n\nBienvenido/a a la Biblioteca UAI. ¿Qué desea hacer?\n");
+
+    printf("\n   1. ¿Deseas agregar un libro?");
+    printf("\n   2. ¿Deseas editar un libro?");
+    printf("\n   3. ¿Deseas eliminar un libro?");
+    printf("\n   4. ¿Desea buscar un libro?");
+    printf("\n   5. ¿Deseas eliminar una sede?");
+    printf("\n   6. Salir");
+}
+
+int buscar_libro(struct struct_libro array_libros[], int arr_size)
 {
     char titulo[100];
     char temp;
     printf("\nPara buscar un libro, ingrese el titulo en doble comillas: ");
+    scanf("%c", &temp);
     scanf("%[^\n]%*c", titulo);
 
     for (int i = 0; i <= arr_size; i++)
     {
-        if (strcmp(titulo, values[i].titulo) == 0)
+        if (strcmp(titulo, array_libros[i].titulo) == 0)
         {
-            printf("\ntitulo:             %s", values[i].titulo);
-            printf("\nautor:               %s", values[i].autor);
-            printf("\nanio:               %i", values[i].anio);
-            printf("\nnumero de estante:  %d", values[i].estante_numero);
-            printf("\nseccion de estante: %s", values[i].estante_seccion);
-            printf("\npiso:               %d", values[i].piso);
-            printf("\nedificio:           %s", values[i].edificio);
-            printf("\nsede:               %s", values[i].sede);
+            printf("\ntitulo:             %s", array_libros[i].titulo);
+            printf("\nautor:               %s", array_libros[i].autor);
+            printf("\nanio:               %i", array_libros[i].anio);
+            printf("\nnumero de estante:  %d", array_libros[i].estante_numero);
+            printf("\nseccion de estante: %s", array_libros[i].estante_seccion);
+            printf("\npiso:               %d", array_libros[i].piso);
+            printf("\nedificio:           %s", array_libros[i].edificio);
+            printf("\nsede:               %s", array_libros[i].sede);
         }
     }
     return 0;
 }
 
-int agregar_libro(struct struct_libro values[], int *index)
+int agregar_libro(struct struct_libro array_libros[], int *index)
 {
     char temp;
     //cuantos libros quiere agregar?
@@ -156,34 +169,34 @@ int agregar_libro(struct struct_libro values[], int *index)
 
         printf("\n--------libro %i-----------\n", cont);
         printf("Ingrese el titulo del libro en doble comillas: ");
-        scanf("%[^\n]%*c", values[p].titulo);
+        scanf("%[^\n]%*c", array_libros[p].titulo);
 
         printf("Ingrese autor del libro: ");
-        scanf("%[^\n]%*c", values[p].autor);
+        scanf("%[^\n]%*c", array_libros[p].autor);
 
         printf("Ingrese anio del libro: ");
-        scanf("%d", &values[p].anio);
+        scanf("%d", &array_libros[p].anio);
         scanf("%c", &temp);
 
         printf("Ingrese el numero del estante en donde se encuentra el libro: ");
-        scanf("%d", &values[p].estante_numero);
+        scanf("%d", &array_libros[p].estante_numero);
         scanf("%c", &temp);
 
         printf("Ingrese la seccion(en letras) en la cual se encuentra el libro: ");
-        scanf("%[^\n]%*c", values[p].estante_seccion);
+        scanf("%[^\n]%*c", array_libros[p].estante_seccion);
 
         printf("Ingrese el piso del edificio en donde se encuentra el libro: ");
-        scanf("%d", &values[p].piso);
+        scanf("%d", &array_libros[p].piso);
         scanf("%c", &temp);
 
         printf("Ingrese la letra del edificio en donde se encuentra el libro: ");
-        scanf("%s", values[p].edificio);
+        scanf("%s", array_libros[p].edificio);
         scanf("%c", &temp);
 
         printf("Ingrese la sede (vina o santiago) en donde se encuentra el libro: ");
-        scanf("%[^\n]%*c", values[p].sede);
+        scanf("%[^\n]%*c", array_libros[p].sede);
 
-        printf("Se agrego: '%s' de manera exitosa!\n", values[p].titulo);
+        printf("Se agrego: '%s' de manera exitosa!\n", array_libros[p].titulo);
         ++(*index);
         ++cont;
     }
@@ -191,18 +204,19 @@ int agregar_libro(struct struct_libro values[], int *index)
     return 0;
 };
 
-int editar_libro(struct struct_libro values[], int arr_size)
+int editar_libro(struct struct_libro array_libros[], int arr_size)
 {
     char titulo[20];
     char temp;
 
     printf("\npara editar un libro, ingrese el titulo: ");
+    scanf("%c", &temp);
     scanf("%[^\n]%*c", titulo);
     printf("\nEditaremos: %s\n", titulo);
 
     for (int i = 0; i <= arr_size; i++)
     {
-        if (strcmp(titulo, values[i].titulo) == 0)
+        if (strcmp(titulo, array_libros[i].titulo) == 0)
         {
             int opcion = 0;
             printf("\n---Elija el numero de la opcion que quiere editar---");
@@ -221,82 +235,82 @@ int editar_libro(struct struct_libro values[], int arr_size)
             if (opcion == 1)
             {
                 char cambio_titulo[100];
-                printf("\nEl titulo actual del libro es: %s", values[i].titulo);
+                printf("\nEl titulo actual del libro es: %s", array_libros[i].titulo);
                 printf("\nIngrese el nuevo titulo: ");
                 scanf("%c", &temp);
                 scanf("%[^\n]%*c", cambio_titulo);
-                strcpy(values[i].titulo, cambio_titulo);
-                printf("\nNuevo titulo: %s", values[i].titulo);
+                strcpy(array_libros[i].titulo, cambio_titulo);
+                printf("\nNuevo titulo: %s", array_libros[i].titulo);
             }
             else if (opcion == 2)
             {
                 char cambio_autor[100];
-                printf("\nEl/los autores actuales son: %s", values[i].autor);
+                printf("\nEl/los autores actuales son: %s", array_libros[i].autor);
                 printf("\nIngrese el nuevo autor: ");
                 scanf("%c", &temp);
                 scanf("%[^\n]%*c", cambio_autor); /*raios, no acepta nombres con espacio*/
-                strcpy(values[i].autor, cambio_autor);
-                printf("\nNuevo autor: %s", values[i].autor);
+                strcpy(array_libros[i].autor, cambio_autor);
+                printf("\nNuevo autor: %s", array_libros[i].autor);
             }
             else if (opcion == 3)
             {
                 int cambio_anio;
-                printf("\nEl anio actual es: %d", values[i].anio);
+                printf("\nEl anio actual es: %d", array_libros[i].anio);
                 printf("\nIngrese el nuevo anio: ");
                 scanf("%c", &temp);
                 scanf("%d", &cambio_anio);
-                values[i].anio = cambio_anio;
-                printf("\nNuevo anio: %d", values[i].anio);
+                array_libros[i].anio = cambio_anio;
+                printf("\nNuevo anio: %d", array_libros[i].anio);
             }
             else if (opcion == 4)
             {
                 int cambio_estante;
-                printf("\nEl numero de estante actual es: %d", values[i].estante_numero);
+                printf("\nEl numero de estante actual es: %d", array_libros[i].estante_numero);
                 printf("\nIngrese el nuevo numero de estante: ");
                 scanf("%c", &temp);
                 scanf("%d", &cambio_estante);
-                values[i].estante_numero = cambio_estante;
-                printf("\nEl libro ahora se encuentra en el estante: %d", values[i].estante_numero);
+                array_libros[i].estante_numero = cambio_estante;
+                printf("\nEl libro ahora se encuentra en el estante: %d", array_libros[i].estante_numero);
             }
             else if (opcion == 5)
             {
                 char cambio_seccion[10];
-                printf("\nEl libro se encuentra actualmente en la seccion de: %s", values[i].estante_seccion);
+                printf("\nEl libro se encuentra actualmente en la seccion de: %s", array_libros[i].estante_seccion);
                 printf("\nIngrese la seccion a la cual desea mover el libro: ");
                 scanf("%c", &temp);
                 scanf("%[^\n]%*c", cambio_seccion);
-                strcpy(values[i].estante_seccion, cambio_seccion);
-                printf("\nEl libro se encuentra ahora en la seccion: %s", values[i].estante_seccion);
+                strcpy(array_libros[i].estante_seccion, cambio_seccion);
+                printf("\nEl libro se encuentra ahora en la seccion: %s", array_libros[i].estante_seccion);
             }
             else if (opcion == 6)
             {
                 int cambio_piso;
-                printf("\nEl numero del piso actual es: %d", values[i].estante_numero);
+                printf("\nEl numero del piso actual es: %d", array_libros[i].estante_numero);
                 printf("\nIngrese a que piso cambiara el libro: ");
                 scanf("%c", &temp);
                 scanf("%d", &cambio_piso);
-                values[i].piso = cambio_piso;
-                printf("\nEl libro se encuentra ahora en el piso: %d", values[i].estante_numero);
+                array_libros[i].piso = cambio_piso;
+                printf("\nEl libro se encuentra ahora en el piso: %d", array_libros[i].estante_numero);
             }
             else if (opcion == 7)
             {
                 char cambio_edificio[10];
-                printf("\nEl libro se encuentra actualmente en el edificio: %s", values[i].edificio);
+                printf("\nEl libro se encuentra actualmente en el edificio: %s", array_libros[i].edificio);
                 printf("\nIngrese a que edificio movera el libro: ");
                 scanf("%c", &temp);
                 scanf("%[^\n]%*c", cambio_edificio);
-                strcpy(values[i].edificio, cambio_edificio);
-                printf("\nEl libro se encuentra ahora en el edificio: %s", values[i].edificio);
+                strcpy(array_libros[i].edificio, cambio_edificio);
+                printf("\nEl libro se encuentra ahora en el edificio: %s", array_libros[i].edificio);
             }
             else if (opcion == 8)
             {
                 char cambio_sede[20];
-                printf("\nEl libro se encuentra actualmente en la sede: %s", values[i].sede);
+                printf("\nEl libro se encuentra actualmente en la sede: %s", array_libros[i].sede);
                 printf("\nIngrese a que sede (vina o santiago) movera el libro: ");
                 scanf("%c", &temp);
                 scanf("%[^\n]%*c", cambio_sede);
-                strcpy(values[i].sede, cambio_sede);
-                printf("\nEl libro se encuentra ahora en la sede: %s", values[i].sede);
+                strcpy(array_libros[i].sede, cambio_sede);
+                printf("\nEl libro se encuentra ahora en la sede: %s", array_libros[i].sede);
             }
             else if (opcion == 9)
             {
@@ -309,23 +323,23 @@ int editar_libro(struct struct_libro values[], int arr_size)
     return 0;
 }
 
-int eliminar_libro(struct struct_libro values[], int arr_size)
+int eliminar_libro(struct struct_libro array_libros[], int arr_size)
 {
     char titulo[100];
     char temp;
 
     printf("\nIntroduzca el titulo del libro del cual desea eliminar elementos: ");
-
+    scanf("%c", &temp);
     scanf("%[^\n]%*c", titulo);
     printf("\nEl libro seleccionado es : %s", titulo);
 
     for (int i = 0; i <= arr_size; i++)
     {
-        if (strcmp(titulo, values[i].titulo) == 0)
+        if (strcmp(titulo, array_libros[i].titulo) == 0)
         {
             int opcion = 0;
-            printf("\n---Introduzca numero del campo que desea eliminar---");
-            printf("\n1) Libro (Esto eliminara completamente todos los datos del libro)");
+            printf("\n\n---estas seguro de que quieres eliminarlo?---");
+            printf("\n1) Si");
             printf("\n2) Volver al menu");
             printf("\nIngrese numero: ");
             scanf("%d", &opcion);
@@ -343,7 +357,7 @@ int eliminar_libro(struct struct_libro values[], int arr_size)
                 else
                 {
                     for (c = numero_libro; c < arr_size; c++)
-                        values[c] = values[c + 1];
+                        array_libros[c] = array_libros[c + 1];
                 }
                 printf("\nSe a eliminado de manera exitosa\n");
             }
@@ -362,7 +376,7 @@ int eliminar_sede(void)
     printf("\nno se pueden eliminar sedes");
 }
 
-int csv_out(struct struct_libro values[], int original_size)
+int csv_out(struct struct_libro array_libros[], int original_size)
 {
     FILE *fp;
     int i;
@@ -371,7 +385,7 @@ int csv_out(struct struct_libro values[], int original_size)
 
     for (i = 0; i < original_size - 1; i++)
     {
-        fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", values[i].titulo, values[i].autor, values[i].anio, values[i].estante_numero, values[i].estante_seccion, values[i].piso, values[i].edificio, values[i].sede);
+        fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", array_libros[i].titulo, array_libros[i].autor, array_libros[i].anio, array_libros[i].estante_numero, array_libros[i].estante_seccion, array_libros[i].piso, array_libros[i].edificio, array_libros[i].sede);
     }
 
     fclose(fp);
@@ -385,24 +399,50 @@ int main(int argc, char **argv)
     FILE *libro_csv = read_file(); /*cambiar la forma*/
     int arr_size = cuenta_lineas(libro_csv);
     rewind(libro_csv);
-    struct struct_libro values[arr_size + 1024];
-    f_populate(libro_csv, values);
-    printf("\n%s", values[1].titulo);
+    struct struct_libro array_libros[arr_size + 1024];
+    rellena_array(libro_csv, array_libros);
+    printf("\n%s", array_libros[1].titulo);
 
     //Menu
-    /*menu opcion 1*/
-    printf("\n\n--------Buscar Libro---------");
-    buscar_libro(values, arr_size);
-    /*menu opcion 2*/
-    printf("\n\n--------Agregar Libro---------");
-    agregar_libro(values, &arr_size);
-    /*menu opcion 3*/
-    printf("\n\n--------Editar Libro---------");
-    editar_libro(values, arr_size);
-    /*menu opcion 4*/
-    printf("\n\n--------Eliminar Libro---------");
-    eliminar_libro(values, arr_size);
-    /*menu opcion 5*/
-    csv_out(values, arr_size);
+    int flag = 1;
+    int menu;
+
+    while (flag)
+    {
+        print_menu();
+        printf("\n\nIngrese el número de la acción: ");
+        scanf("%d", &menu);
+
+        switch (menu)
+        {
+        case 1:
+            agregar_libro(array_libros, &arr_size);
+            break;
+
+        case 2:
+            editar_libro(array_libros, arr_size);
+            break;
+
+        case 3:
+            eliminar_libro(array_libros, arr_size);
+            break;
+
+        case 4:
+            buscar_libro(array_libros, arr_size);
+            break;
+
+        case 5:
+            eliminar_sede();
+            break;
+
+        case 6:
+            flag = 0;
+            break;
+
+        default:
+            break;
+        }
+    }
+
     return 0;
 }
