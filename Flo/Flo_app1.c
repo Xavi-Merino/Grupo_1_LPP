@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+int fila;
 struct struct_libro
 {
     char titulo[100];
@@ -129,7 +129,6 @@ void printmenu()
 
 int buscarlibro(struct struct_libro values[], int arr_size){
   char titulo[100];
-  int fila;
   printf("ingrese el titulo del libro que quiere buscar: \n");
   scanf("%s", titulo);
   for (int i = 0; i<= arr_size; i++ ){
@@ -409,7 +408,7 @@ int main(int argc, char **argv)
         break;
 
         case 4: ;
-        int fila;
+        buscarlibro(values, arr_size);
         fila=buscarlibro(values, arr_size);
         printf("Título: %s\nAutor: %s\nAño: %d\nNº Estante: %d\nSección: %s\nPiso: %d\nEdificio: %s\nSede: %s\n", 
             values[fila].titulo, 
