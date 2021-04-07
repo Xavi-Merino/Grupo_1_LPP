@@ -44,6 +44,7 @@ char rellena_array(FILE *libro_csv, struct struct_libro array_libros[])
     int i = 0;
     char buff[1024];
     fgets(buff, 1024, (FILE *)libro_csv);
+
     while (fgets(buff, 1024, libro_csv))
     {
         int field_count = 0;
@@ -357,14 +358,14 @@ int eliminar_sede(void)
     printf("\nno se pueden eliminar sedes");
 }
 
-int csv_out(struct struct_libro array_libros[], int original_size)
+int csv_out(struct struct_libro array_libros[], int arr_size)
 {
     FILE *fp;
     int i;
     fp = fopen("prueba.csv", "w");
     fprintf(fp, "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
 
-    for (i = 0; i < original_size - 1; i++)
+    for (i = 0; i < arr_size - 1; i++)
     {
         fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", array_libros[i].titulo, array_libros[i].autor, array_libros[i].anio, array_libros[i].estante_numero, array_libros[i].estante_seccion, array_libros[i].piso, array_libros[i].edificio, array_libros[i].sede);
     }
