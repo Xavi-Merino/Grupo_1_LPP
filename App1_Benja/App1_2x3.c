@@ -47,28 +47,10 @@ char rellena_array(FILE *libro_csv, struct struct_libro array_libros[])
     while (fgets(buff, 1024, libro_csv))
     {
         int field_count = 0;
-
-        int commas = 0;
-
-        if (*buff == '"')
-        {
-            int index = 1;
-            while (*(buff + index) != '"')
-            {
-
-                if (*(buff + index) == ',')
-                {
-                    ++commas;
-                }
-                ++index;
-            }
-        }
-
         char *field = strtok(buff, ",");
 
         while (field)
         {
-            int skip = 0;
             if (field_count == 0)
             {
                 strcpy(array_libros[i].titulo, field);
@@ -118,7 +100,6 @@ char rellena_array(FILE *libro_csv, struct struct_libro array_libros[])
 void print_menu()
 {
     printf("\n\nBienvenido/a a la Biblioteca UAI. ¿Qué desea hacer?\n");
-
     printf("\n   1. ¿Deseas agregar un libro?");
     printf("\n   2. ¿Deseas editar un libro?");
     printf("\n   3. ¿Deseas eliminar un libro?");
