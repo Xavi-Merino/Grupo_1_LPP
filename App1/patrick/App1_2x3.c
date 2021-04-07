@@ -323,13 +323,13 @@ void eliminar_sede(void) { printf("\nno se pueden eliminar sedes"); }
 int csv_out(struct struct_libro array_libros[], int original_size) {
   FILE *fp;
   int i;
-  fp = fopen("prueba.csv", "w");
+  fp = fopen("prueba.csv", "w+");
   fprintf(
       fp,
       "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
 
-  for (i = 0; i < original_size - 1; i++) {
-    fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", array_libros[i].titulo,
+  for (i = 0; i < original_size; i++) {
+    fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s\n", array_libros[i].titulo,
             array_libros[i].autor, array_libros[i].anio,
             array_libros[i].estante_numero, array_libros[i].estante_seccion,
             array_libros[i].piso, array_libros[i].edificio,
@@ -347,6 +347,7 @@ int main(int argc, char **argv) {
 
   int arr_size = cuenta_lineas(libro_csv);
   rewind(libro_csv);
+
   struct struct_libro array_libros[arr_size + 1024];
   rellena_array(libro_csv, array_libros);
 
@@ -389,5 +390,6 @@ int main(int argc, char **argv) {
     }
   }
 
+  csv_out(array_libros, arr_size);
   return 0;
 }
