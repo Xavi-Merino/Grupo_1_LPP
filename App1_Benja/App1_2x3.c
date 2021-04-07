@@ -43,15 +43,20 @@ char rellena_array(FILE *libro_csv, struct struct_libro array_libros[])
 {
     int i = 0;
     char buff[1024];
-    fgets(buff, 1024, (FILE *)libro_csv);
 
     while (fgets(buff, 1024, libro_csv))
     {
+
+        if (strlen(buff) == 0)
+        {
+            break;
+        }
         int field_count = 0;
         char *field = strtok(buff, ",");
 
         while (field)
         {
+
             if (field_count == 0)
             {
                 strcpy(array_libros[i].titulo, field);
@@ -89,12 +94,16 @@ char rellena_array(FILE *libro_csv, struct struct_libro array_libros[])
             else if (field_count == 6)
                 strcpy(array_libros[i].edificio, field);
             else if (field_count == 7)
+            {
                 strcpy(array_libros[i].sede, field);
+            }
             field = strtok(NULL, ",");
+
             field_count++;
         }
         i++;
     }
+
     return 0;
 }
 
@@ -104,8 +113,8 @@ void print_menu()
     printf("\n   1. ¿Deseas agregar un libro?");
     printf("\n   2. ¿Deseas editar un libro?");
     printf("\n   3. ¿Deseas eliminar un libro?");
-    printf("\n   4. ¿Desea buscar un libro?");
-    printf("\n   5. ¿Deseas eliminar una sede?");
+    printf("\n   4. ¿Deseas buscar un libro?");
+    printf("\n   5. ¿Deseas eliminar una sede o seccion?");
     printf("\n   6. Salir");
 }
 
@@ -122,7 +131,7 @@ int buscar_libro(struct struct_libro array_libros[], int arr_size)
         if (strcmp(titulo, array_libros[i].titulo) == 0)
         {
             printf("\ntitulo:             %s", array_libros[i].titulo);
-            printf("\nautor:               %s", array_libros[i].autor);
+            printf("\nautor:              %s", array_libros[i].autor);
             printf("\nanio:               %i", array_libros[i].anio);
             printf("\nnumero de estante:  %d", array_libros[i].estante_numero);
             printf("\nseccion de estante: %s", array_libros[i].estante_seccion);
@@ -150,10 +159,10 @@ int agregar_libro(struct struct_libro array_libros[], int *index)
     {
 
         printf("\n--------libro %i-----------\n", cont);
-        printf("Ingrese el titulo del libro en doble comillas: ");
+        printf("Ingrese el titulo del libro \nen doble comillas: ");
         scanf("%[^\n]%*c", array_libros[p].titulo);
 
-        printf("Ingrese autor del libro: ");
+        printf("Ingrese autor del libro en doble comillas: ");
         scanf("%[^\n]%*c", array_libros[p].autor);
 
         printf("Ingrese anio del libro: ");
@@ -164,22 +173,24 @@ int agregar_libro(struct struct_libro array_libros[], int *index)
         scanf("%d", &array_libros[p].estante_numero);
         scanf("%c", &temp);
 
-        printf("Ingrese la seccion(en letras) en la cual se encuentra el libro: ");
+        printf("Ingrese la seccion en la cual se encuentra el libro \nen doble comillas: ");
         scanf("%[^\n]%*c", array_libros[p].estante_seccion);
 
-        printf("Ingrese el piso del edificio en donde se encuentra el libro: ");
+        printf("Ingrese el numero del piso en donde se encuentra el libro: ");
         scanf("%d", &array_libros[p].piso);
         scanf("%c", &temp);
 
-        printf("Ingrese la letra del edificio en donde se encuentra el libro: ");
+        printf("Ingrese la letra del edificio en donde se encuentra el libro \nen doble comillas: ");
         scanf("%s", array_libros[p].edificio);
         scanf("%c", &temp);
 
-        printf("Ingrese la sede (vina o santiago) en donde se encuentra el libro: ");
+        printf("Ingrese la sede (Vina del Mar o Santiago) en donde se encuentra el libro \nen doble comillas: ");
         scanf("%[^\n]%*c", array_libros[p].sede);
 
+        strcat(array_libros[p].sede, "\n");
+
         printf("Se agrego: '%s' de manera exitosa!\n", array_libros[p].titulo);
-        ++(*index);
+        (*index)++;
         ++cont;
     }
 
@@ -358,16 +369,23 @@ int eliminar_sede(void)
     printf("\nno se pueden eliminar sedes");
 }
 
+int eliminar_seccion(void)
+{
+    printf("\nno se pueden eliminar secciones");
+}
+
 int csv_out(struct struct_libro array_libros[], int arr_size)
 {
-    FILE *fp;
+    FILE *fp = fopen("prueba.csv", "w");
     int i;
-    fp = fopen("prueba.csv", "w");
+
     fprintf(fp, "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
 
-    for (i = 0; i < arr_size - 1; i++)
+    for (i = 1; i < arr_size; i++)
     {
-        fprintf(fp, "%s,%s,%d,%d,%s,%d,%s,%s", array_libros[i].titulo, array_libros[i].autor, array_libros[i].anio, array_libros[i].estante_numero, array_libros[i].estante_seccion, array_libros[i].piso, array_libros[i].edificio, array_libros[i].sede);
+        fprintf(fp, "%s,%s,%i,%i,%s,%i,%s,%s", array_libros[i].titulo,
+                array_libros[i].autor, array_libros[i].anio, array_libros[i].estante_numero,
+                array_libros[i].estante_seccion, array_libros[i].piso, array_libros[i].edificio, array_libros[i].sede);
     }
 
     fclose(fp);
@@ -383,12 +401,8 @@ int main(int argc, char **argv)
     rewind(libro_csv);
     struct struct_libro array_libros[arr_size + 1024];
     rellena_array(libro_csv, array_libros);
-    printf("\n%s", array_libros[1].titulo);
-
-    //sedes
-    struct struct_libro sede_vina[arr_size + 1024];
-    struct struct_libro sede_santiago[arr_size + 1024];
-    rellenar_sedes(array_libros, sede_vina, sede_santiago, arr_size);
+    //algo
+    printf("\n%s\n", array_libros[1].titulo);
 
     //Menu
     int flag = 1;
@@ -420,10 +434,12 @@ int main(int argc, char **argv)
 
         case 5:
             eliminar_sede();
+            eliminar_seccion();
             break;
 
         case 6:
             flag = 0;
+            csv_out(array_libros, arr_size);
             break;
 
         default:
