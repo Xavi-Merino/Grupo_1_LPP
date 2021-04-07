@@ -384,6 +384,11 @@ int main(int argc, char **argv)
     rellena_array(libro_csv, array_libros);
     printf("\n%s", array_libros[1].titulo);
 
+    //sedes
+    struct struct_libro sede_vina[arr_size + 1024];
+    struct struct_libro sede_santiago[arr_size + 1024];
+    rellenar_sedes(array_libros, sede_vina, sede_santiago, arr_size);
+
     //Menu
     int flag = 1;
     int menu;
