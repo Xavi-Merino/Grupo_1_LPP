@@ -1,1 +1,1 @@
-c
+arr_size
