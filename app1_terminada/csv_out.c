@@ -2,7 +2,7 @@
 
 int csv_out(struct struct_libro array_libros[], int arr_size)
 {
-    FILE *fp = fopen("prueba.csv", "w");
+    FILE *fp = fopen("inventario.csv", "w");
     int i;
 
     fprintf(fp, "titulo,autor,anio,estante_numero,estante_seccion,piso,edificio,sede\n");
