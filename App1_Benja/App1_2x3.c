@@ -435,7 +435,7 @@ int main(int argc, char **argv)
             eliminar_seccion();
             break;
 
-        case 6:
+        case 7:
             flag = 0;
             csv_out(array_libros, arr_size);
             break;
