@@ -241,7 +241,7 @@ int editar_libro(struct struct_libro array_libros[], int arr_size)
                 printf("\nEl/los autores actuales son: %s", array_libros[i].autor);
                 printf("\nIngrese el nuevo autor: ");
                 scanf("%c", &temp);
-                scanf("%[^\n]%*c", cambio_autor); /*raios, no acepta nombres con espacio*/
+                scanf("%[^\n]%*c", cambio_autor); 
                 strcpy(array_libros[i].autor, cambio_autor);
                 printf("\nNuevo autor: %s", array_libros[i].autor);
             }
