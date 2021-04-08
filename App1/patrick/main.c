@@ -39,10 +39,12 @@ int main(int argc, char **argv) {
 
       case 5:
         eliminar_sede();
+        eliminar_seccion();
         break;
 
       case 6:
         flag = 0;
+        csv_out(array_libros, arr_size);
         break;
 
       default:
@@ -50,6 +52,5 @@ int main(int argc, char **argv) {
     }
   }
 
-  csv_out(array_libros, arr_size);
   return 0;
 }

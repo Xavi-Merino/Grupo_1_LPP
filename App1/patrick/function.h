@@ -31,4 +31,4 @@ int eliminar_libro(struct struct_libro array_libros[], int arr_size);
 
 void eliminar_sede(void);
 
-int csv_out(struct struct_libro array_libros[], int original_size);
+int csv_out(struct struct_libro array_libros[], int arr_size);
