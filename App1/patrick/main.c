@@ -39,10 +39,13 @@ int main(int argc, char **argv) {
 
       case 5:
         eliminar_sede();
-        eliminar_seccion();
         break;
 
       case 6:
+        eliminar_seccion();
+        break;
+
+      case 7:
         flag = 0;
         csv_out(array_libros, arr_size);
         break;
