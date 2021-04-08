@@ -6,6 +6,6 @@ void print_menu() {
   printf("\n   2. ¿Deseas editar un libro?");
   printf("\n   3. ¿Deseas eliminar un libro?");
   printf("\n   4. ¿Desea buscar un libro?");
-  printf("\n   5. ¿Deseas eliminar una sede?");
+  printf("\n   5. ¿Deseas eliminar una sede o seccion?");
   printf("\n   6. Salir");
 }
