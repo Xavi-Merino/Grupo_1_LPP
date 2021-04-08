@@ -14,9 +14,9 @@ struct struct_libro
     char sede[20];
 };
 
-FILE *read_file(void)
+FILE *read_file(char *filename)
 {
-    FILE *archivo_csv = fopen("ejemplo1.csv", "r");
+    FILE *archivo_csv = fopen(filename, "r");
     if (archivo_csv == NULL)
     {
         printf("\nel archivo no pudo ser abierto");
@@ -241,7 +241,7 @@ int editar_libro(struct struct_libro array_libros[], int arr_size)
                 printf("\nEl/los autores actuales son: %s", array_libros[i].autor);
                 printf("\nIngrese el nuevo autor: ");
                 scanf("%c", &temp);
-                scanf("%[^\n]%*c", cambio_autor); 
+                scanf("%[^\n]%*c", cambio_autor);
                 strcpy(array_libros[i].autor, cambio_autor);
                 printf("\nNuevo autor: %s", array_libros[i].autor);
             }
@@ -394,15 +394,13 @@ int csv_out(struct struct_libro array_libros[], int arr_size)
 
 int main(int argc, char **argv)
 {
-    printf("\n--------Inicio---------");
+    printf("\n--------Inicio---------\n");
     //CSV a Array
-    FILE *libro_csv = read_file(); /*cambiar la forma*/
+    FILE *libro_csv = read_file(argv[1]);
     int arr_size = cuenta_lineas(libro_csv);
     rewind(libro_csv);
     struct struct_libro array_libros[arr_size + 1024];
     rellena_array(libro_csv, array_libros);
-    //algo
-    printf("\n%s\n", array_libros[1].titulo);
 
     //Menu
     int flag = 1;
