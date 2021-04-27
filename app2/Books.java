@@ -1,18 +1,20 @@
+import java.util.Objects;
+
 public class Books {
-    String titulo;
-    String autor;
-    int anio;
-    int numeroEstante;
-    String seccionEstante;
-    int piso;
-    char edificio;
-    String sede;
+    private String titulo;
+    private String autor;
+    private int anio;
+    private int numeroEstante;
+    private String seccionEstante;
+    private int piso;
+    private String edificio;
+    private String sede;
 
     public Books() {
     }
 
     public Books(String titulo, String autor, int anio, int numeroEstante, String seccionEstante, int piso,
-            char edificio, String sede) {
+            String edificio, String sede) {
         this.titulo = titulo;
         this.autor = autor;
         this.anio = anio;
@@ -71,11 +73,11 @@ public class Books {
         this.piso = piso;
     }
 
-    public char getEdificio() {
+    public String getEdificio() {
         return this.edificio;
     }
 
-    public void setEdificio(char edificio) {
+    public void setEdificio(String edificio) {
         this.edificio = edificio;
     }
 
@@ -117,7 +119,7 @@ public class Books {
         return this;
     }
 
-    public Books edificio(char edificio) {
+    public Books edificio(String edificio) {
         setEdificio(edificio);
         return this;
     }
@@ -137,7 +139,7 @@ public class Books {
         Books books = (Books) o;
         return Objects.equals(titulo, books.titulo) && Objects.equals(autor, books.autor) && anio == books.anio
                 && numeroEstante == books.numeroEstante && Objects.equals(seccionEstante, books.seccionEstante)
-                && piso == books.piso && edificio == books.edificio && Objects.equals(sede, books.sede);
+                && piso == books.piso && Objects.equals(edificio, books.edificio) && Objects.equals(sede, books.sede);
     }
 
     @Override
