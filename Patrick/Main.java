@@ -13,9 +13,14 @@ public class Main {
         for (Books books : bookList) {
             System.out.println(books);
         }
+
+        // int n_menu = ;
+
         Menus menu = new Menus();
 
         menu.Inicio();
+
+        menu.Agregar();
 
     }
 

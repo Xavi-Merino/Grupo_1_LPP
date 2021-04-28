@@ -13,7 +13,10 @@ public class Menus {
         System.out.println("   5. Deseas eliminar una sede?");
         System.out.println("   6. Deseas eliminar una seccion?");
         System.out.println("   7. Salir\n");
-        return;
+    }
+
+    public void Agregar() {
+        System.out.println("Escoja el libro blabla");
     }
 
 }
