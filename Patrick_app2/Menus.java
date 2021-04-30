@@ -16,7 +16,8 @@ public class Menus {
     }
 
     public void Agregar() {
-        System.out.println("Escoja el libro blabla");
+        System.out.println("\n\n______________________");
+        System.out.println("\nIntroduzca los datos del libro que quiere agregar:");
     }
 
 }

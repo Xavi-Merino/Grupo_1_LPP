@@ -48,4 +48,37 @@ public class Functions {
         return book;
     }
 
+    public static Books addOneBook(Scanner input) {
+
+        System.out.println("Introduzca titulo: ");
+        input.nextLine();
+        String titulo = input.nextLine();
+
+        System.out.println("Introduzca autor: ");
+        String autor = input.nextLine();
+
+        System.out.println("Introduzca anio: ");
+        int anio = input.nextInt();
+
+        System.out.println("Introduzca numero del estante: ");
+        int numeroEstante = input.nextInt();
+
+        System.out.println("Introduzca seccion del Estante: ");
+        input.nextLine();
+        String seccionEstante = input.nextLine();
+
+        System.out.println("Introduzca el piso: ");
+        int piso = input.nextInt();
+
+        System.out.println("Introduzca la letra del edificio: ");
+        input.nextLine();
+        String edificio = input.nextLine();
+
+        System.out.println("Introduzca la sede: ");
+        String sede = input.nextLine();
+
+        Books book = new Books(titulo, autor, anio, numeroEstante, seccionEstante, piso, edificio, sede);
+        return book;
+    }
+
 }

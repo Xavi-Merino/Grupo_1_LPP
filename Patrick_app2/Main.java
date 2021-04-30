@@ -8,19 +8,41 @@ public class Main {
 
         String filePath = System.getProperty("user.dir") + File.separator + args[0];
         // System.out.println(filePath);
-        List<Books> bookList = fun.getBooks(filePath);
+        List<Books> bookList = Functions.getBooks(filePath);
 
         for (Books books : bookList) {
             System.out.println(books);
         }
 
-        // int n_menu = ;
-
         Menus menu = new Menus();
+        Scanner input = new Scanner(System.in);
 
-        menu.Inicio();
+        int n_menu = 0;
 
-        menu.Agregar();
+        boolean flag = true;
+        while (flag == true) {
+
+            menu.Inicio();
+            n_menu = input.nextInt();
+
+            switch (n_menu) {
+            case 1:
+                menu.Agregar();
+                bookList.add(Functions.addOneBook(input));
+
+                for (Books books : bookList) {
+                    System.out.println(books);
+                }
+
+                break;
+
+            default:
+                flag = false;
+                break;
+            }
+        }
+
+        input.close();
 
     }
 
