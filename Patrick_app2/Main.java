@@ -26,19 +26,19 @@ public class Main {
             n_menu = input.nextInt();
 
             switch (n_menu) {
-            case 1:
-                menu.Agregar();
-                bookList.add(Functions.addOneBook(input));
+                case 1:
+                    menu.Agregar();
+                    bookList.add(Functions.addOneBook(input));
 
-                for (Books books : bookList) {
-                    System.out.println(books);
-                }
+                    for (Books books : bookList) {
+                        System.out.println(books);
+                    }
 
-                break;
+                    break;
 
-            default:
-                flag = false;
-                break;
+                default:
+                    flag = false;
+                    break;
             }
         }
 
