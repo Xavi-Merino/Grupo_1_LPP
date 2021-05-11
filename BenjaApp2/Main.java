@@ -9,7 +9,6 @@ public class Main {
     public static void main(String[] args) {
 
         String filePath = System.getProperty("user.dir") + File.separator + args[0];
-
         List<Books> bookList = fun.getBooks(filePath);
 
         // eliminar
