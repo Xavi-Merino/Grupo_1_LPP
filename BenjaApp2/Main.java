@@ -4,58 +4,29 @@ import java.util.*;
 public class Main {
     static Functions fun = new Functions();
     static Scanner input = new Scanner(System.in);
+    static Editarlibro edit = new Editarlibro();
 
     public static void main(String[] args) {
 
         String filePath = System.getProperty("user.dir") + File.separator + args[0];
-        // System.out.println(filePath);
+
         List<Books> bookList = fun.getBooks(filePath);
 
-        System.out.println("\nlibros antes");
+        // eliminar
+        bookList.remove(fun.removeOneBook(bookList, fun.bookToChoose()));
 
-        for (Books books : bookList) {
-            System.out.println(books.getTitulo());
-        }
+        // editar
+        edit.editarLibro(bookList, fun.bookToChoose());
 
-        Menus menu = new Menus();
-        int menuNumber = 0;
-        boolean flag = true;
+        // agregar
+        bookList.add(fun.addOneBook());
 
-        menu.deleteBook(); // prints out text
-        String bookToDelete = input.nextLine(); // inputs name of book
-        bookList.remove(fun.removeOneBook(bookList, bookToDelete)); // removes book from booklist
+        // buscar
+        fun.displayOneBook(bookList, fun.bookToChoose());
 
-        System.out.println("\nlibros despues");
-
-        for (Books books : bookList) {
-            System.out.println(books.getTitulo());
-        }
-
-        // while (flag == true) {
-
-        // menu.Inicio();
-        // menuNumber = input.nextInt();
-
-        // switch (menuNumber) {
-        // case 1:
-        // menu.Agregar();
-        // bookList.add(fun.addOneBook(input));
-
-        // for (Books books : bookList) {
-        // System.out.println(books);
-        // }
-
-        // break;
-
-        // break;
-        // default:
-        // flag = false;
-        // break;
-        // }
-        // }
-
-        // input.close();
-
+        // guardar
+        String filePathOut = fun.createFile();
+        fun.saveBooks(bookList, filePathOut);
     }
 
 }
