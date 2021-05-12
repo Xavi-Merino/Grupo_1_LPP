@@ -84,14 +84,21 @@ public class Functions {
     }
 
     public String bookToChoose() {
-        String titulo = input.nextLine();
+        String titulo = "\"" + input.nextLine() + "\"";
         return titulo;
     }
 
     public void displayOneBook(List<Books> bookList, String bookToDisplay) {
         for (Books book : bookList) {
-            if (book.getTitulo().equals(bookToDisplay))
-                System.out.println(book);
+            if (book.getTitulo().equals(bookToDisplay)) {
+                System.out.println("Usted busco el libro: " + book.getTitulo());
+                System.out.println("El(Los) autor(es) del libro es: " + book.getAutor());
+                System.out.println("Fue publicado el anio: " + book.getAnio());
+                System.out.println("Este libro esta ubicado en la sede " + book.getSede() + ", en el edificio "
+                        + book.getEdificio() + ", en el piso " + book.getPiso() + ", en estante de "
+                        + book.getSeccionEstante() + " y seccion " + book.getNumeroEstante());
+            }
+
         }
     }
 
@@ -140,11 +147,11 @@ public class Functions {
         for (Books book : bookList) {
             if (book.getSede().equals(n)) {
                 thereisntabook = false;
-                System.out.println("No podemos eliminar la seccion porque " + book.getTitulo() + " esta alli.");
+                System.out.println("No podemos eliminar la sede porque " + book.getTitulo() + " esta alli.");
             }
         }
         if (thereisntabook) {
-            System.out.println("No existe tal seccion dentro de la biblioteca.");
+            System.out.println("No existe tal sede dentro en la biblioteca UAI.");
         }
     }
 

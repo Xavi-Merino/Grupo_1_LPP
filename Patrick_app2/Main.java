@@ -32,7 +32,6 @@ public class Main {
                     // editar
                     System.out.println("Introduzca titulo del libro que quiere editar: ");
                     edit.editarLibro(bookList, fun.bookToChoose());
-
                     break;
                 case 3:
                     // eliminar
@@ -42,6 +41,7 @@ public class Main {
                     break;
                 case 4:
                     // buscar
+                    System.out.println("Introduzca titulo del libro que quiere buscar: ");
                     fun.displayOneBook(bookList, fun.bookToChoose());
                     break;
                 case 5:

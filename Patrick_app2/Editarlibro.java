@@ -1,4 +1,3 @@
-
 import java.util.*;
 
 public class Editarlibro {
@@ -6,7 +5,6 @@ public class Editarlibro {
     static Scanner input = new Scanner(System.in);
 
     public int opcionEditar() {
-
         System.out.println("1) Cambiar titulo");
         System.out.println("2) Cambiar autor");
         System.out.println("3) Cambiar anio");
@@ -16,25 +14,26 @@ public class Editarlibro {
         System.out.println("7) Cambiar edificio");
         System.out.println("8) Cambiar sede");
         System.out.println("9) Volver al menu");
-        System.out.println("Ingrese que quiere editar de el libro:");
+        System.out.println("Ingrese que quiere editar del libro:");
         int opcionElegida = input.nextInt();
+        System.out.println(opcionElegida);
         return opcionElegida;
     }
 
-    public Books editarLibro(List<Books> bookList, String bookToEdit) {
+    public void editarLibro(List<Books> bookList, String bookToEdit) {
         int opcionElegida = opcionEditar();
         for (Books book : bookList) {
             if (book.getTitulo().equals(bookToEdit)) {
                 if (opcionElegida == 1) {
                     System.out.println("Ingrese el titulo nuevo");
                     input.nextLine();
-                    String titulo = input.nextLine();
+                    String titulo = "\"" + input.nextLine() + "\"";
                     book.setTitulo(titulo);
                 }
                 if (opcionElegida == 2) {
                     System.out.println("Ingrese el autor nuevo");
                     input.nextLine();
-                    String autor = input.nextLine();
+                    String autor = "\"" + input.nextLine() + "\"";
                     book.setAutor(autor);
                 }
                 if (opcionElegida == 3) {
@@ -52,7 +51,7 @@ public class Editarlibro {
                 if (opcionElegida == 5) {
                     System.out.println("Ingrese la seccion nueva");
                     input.nextLine();
-                    String seccionEstante = input.nextLine();
+                    String seccionEstante = "\"" + input.nextLine() + "\"";
                     book.setSeccionEstante(seccionEstante);
                 }
                 if (opcionElegida == 6) {
@@ -64,17 +63,16 @@ public class Editarlibro {
                 if (opcionElegida == 7) {
                     System.out.println("Ingrese el edificio nuevo");
                     input.nextLine();
-                    String edificio = input.nextLine();
+                    String edificio = "\"" + input.nextLine() + "\"";
                     book.setEdificio(edificio);
                 }
                 if (opcionElegida == 8) {
                     System.out.println("Ingrese la sede nueva");
                     input.nextLine();
-                    String sede = input.nextLine();
+                    String sede = "\"" + input.nextLine() + "\"";
                     book.setSede(sede);
                 }
             }
         }
-        return null;
     }
 }
