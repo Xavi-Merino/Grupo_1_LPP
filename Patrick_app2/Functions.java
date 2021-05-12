@@ -134,4 +134,46 @@ public class Functions {
 
     }
 
+    public void deleteSede(List<Books> bookList) {
+        String n = '\"' + input.nextLine() + '\"';
+        boolean thereisntabook = true;
+        for (Books book : bookList) {
+            if (book.getSede().equals(n)) {
+                thereisntabook = false;
+                System.out.println("No podemos eliminar la seccion porque " + book.getTitulo() + " esta alli.");
+            }
+        }
+        if (thereisntabook) {
+            System.out.println("No existe tal seccion dentro de la biblioteca.");
+        }
+    }
+
+    public void deleteSeccion(List<Books> bookList) {
+        String n = '\"' + input.nextLine() + '\"';
+        boolean thereisntabook = true;
+        for (Books book : bookList) {
+            if (book.getSeccionEstante().equals(n)) {
+                thereisntabook = false;
+                System.out.println("No podemos eliminar la seccion porque " + book.getTitulo() + " esta alli.");
+            }
+        }
+        if (thereisntabook) {
+            System.out.println("No existe tal seccion dentro de la biblioteca.");
+        }
+    }
+
+    public void deletePiso(List<Books> bookList) {
+        int n = input.nextInt();
+        boolean thereisntabook = true;
+        for (Books book : bookList) {
+            if (book.getPiso() == n) {
+                thereisntabook = false;
+                System.out.println("No podemos eliminar el piso porque " + book.getTitulo() + " esta alli.");
+            }
+        }
+        if (thereisntabook) {
+            System.out.println("No existe tal piso dentro de la biblioteca.");
+        }
+    }
+
 }

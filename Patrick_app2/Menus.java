@@ -11,7 +11,8 @@ class Menus {
         System.out.println("   4. Deseas buscar un libro?");
         System.out.println("   5. Deseas eliminar una sede?");
         System.out.println("   6. Deseas eliminar una seccion?");
-        System.out.println("   7. Salir y guardar\n");
+        System.out.println("   7. Deseas eliminar un piso?");
+        System.out.println("   8. Salir y guardar\n");
     }
 
     public static void Agregar() {
