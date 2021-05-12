@@ -98,27 +98,7 @@ public class Functions {
                         + book.getEdificio() + ", en el piso " + book.getPiso() + ", en estante de "
                         + book.getSeccionEstante() + " y seccion " + book.getNumeroEstante());
             }
-
         }
-    }
-
-    public String createFile() {
-        try {
-            System.out.print("Ingrese el nombre del nuevo archivo(sin .csv): ");
-            String filename = input.nextLine();
-            File myObj = new File(filename + ".csv");
-            if (myObj.createNewFile()) {
-                System.out.println("Archivo creado: " + myObj.getName());
-            } else {
-                System.out.println("Archivo ya existe.");
-            }
-            String filePathOut = System.getProperty("user.dir") + File.separator + filename + ".csv";
-            return filePathOut;
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public void saveBooks(List<Books> bookList, String filePathOut) {

@@ -1,4 +1,5 @@
 import java.io.*;
+import java.nio.file.*;
 import java.util.*;
 
 public class Main {
@@ -31,7 +32,7 @@ public class Main {
                 case 2:
                     // editar
                     System.out.println("Introduzca titulo del libro que quiere editar: ");
-                    edit.editarLibro(bookList, fun.bookToChoose());
+                    edit.editBook(bookList, fun.bookToChoose());
                     break;
                 case 3:
                     // eliminar
@@ -60,7 +61,6 @@ public class Main {
                     // eliminar piso
                     System.out.println("Introduzca el piso que quiere eliminar: ");
                     fun.deletePiso(bookList);
-
                     break;
 
                 default:
@@ -69,8 +69,18 @@ public class Main {
             }
         }
 
+        // eliminar archivo anterior
+        Path path = FileSystems.getDefault().getPath(filePath);
+        try {
+            Files.delete(path);
+        } catch (NoSuchFileException x) {
+            System.err.format("%s: no such" + " file or directory%n", path);
+        } catch (IOException x) {
+            System.err.println(x);
+        }
+
         // guardar
-        String filePathOut = fun.createFile();
+        String filePathOut = filePath;
         fun.saveBooks(bookList, filePathOut);
     }
 

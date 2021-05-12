@@ -5,22 +5,13 @@ public class Editarlibro {
     static Scanner input = new Scanner(System.in);
 
     public int opcionEditar() {
-        System.out.println("1) Cambiar titulo");
-        System.out.println("2) Cambiar autor");
-        System.out.println("3) Cambiar anio");
-        System.out.println("4) Cambiar numero de estante");
-        System.out.println("5) Cambiar seccion");
-        System.out.println("6) Cambiar piso");
-        System.out.println("7) Cambiar edificio");
-        System.out.println("8) Cambiar sede");
-        System.out.println("9) Volver al menu");
+        Menus.Editar();
         System.out.println("Ingrese que quiere editar del libro:");
         int opcionElegida = input.nextInt();
-        System.out.println(opcionElegida);
         return opcionElegida;
     }
 
-    public void editarLibro(List<Books> bookList, String bookToEdit) {
+    public void editBook(List<Books> bookList, String bookToEdit) {
         int opcionElegida = opcionEditar();
         for (Books book : bookList) {
             if (book.getTitulo().equals(bookToEdit)) {
